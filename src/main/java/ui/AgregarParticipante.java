@@ -1,6 +1,6 @@
 package ui;
 
-import database.ParticipantesDatabase;
+import model.DatabaseRegistroParticipantes;
 import model.Participantes;
 
 import java.awt.ComponentOrientation;
@@ -17,20 +17,14 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 public class AgregarParticipante extends JFrame {
-    private ParticipantesDatabase db;
+    private Participantes participantes;
     private JTextField nombre;
     private JTextField telefono;
     private JTextField region;
-    private Participantes participantes;
 
     public AgregarParticipante() throws SQLException {
-        this.db = new ParticipantesDatabase();
-        setupUIComponents();
-    }
-
-    public AgregarParticipante(Participantes participantes) throws SQLException {
-        this.participantes = participantes;
-        this.db = new ParticipantesDatabase();
+        DatabaseRegistroParticipantes registro = new DatabaseRegistroParticipantes();
+        this.participantes = new Participantes(registro);
         setupUIComponents();
     }
 
@@ -88,7 +82,7 @@ public class AgregarParticipante extends JFrame {
             JOptionPane.showMessageDialog(this, "Region desconocida. Las conocidas son: China, US, Europa");
             return;
         }
-        db.insertParticipante(nombre.getText(), telefono.getText(), region.getText());
+        participantes.nuevoParticipante(nombre.getText(), telefono.getText(), region.getText());
         dispose();
     }
 
@@ -97,4 +91,3 @@ public class AgregarParticipante extends JFrame {
         return telefono.matches(regex);
     }
 }
-

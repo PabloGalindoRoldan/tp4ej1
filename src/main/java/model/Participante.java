@@ -10,4 +10,16 @@ public class Participante {
         this.telefono = telefono;
         this.region = region;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public String getRegion() {
+        return region;
+    }
 }
